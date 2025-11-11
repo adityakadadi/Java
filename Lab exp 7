@@ -1,0 +1,76 @@
+7. Write a java program to add TWO matrices of suitable order N (The value of N should be read from command line arguments).
+code:-
+
+import java.util.Scanner;
+
+public class MatrixOperations {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter number of rows:");
+        int rows = sc.nextInt();
+
+        System.out.println("Enter number of columns:");
+        int cols = sc.nextInt();
+
+        int[][] matrix1 = new int[rows][cols];
+        int[][] matrix2 = new int[rows][cols];
+
+        System.out.println("Enter elements of first matrix:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix1[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.println("Enter elements of second matrix:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix2[i][j] = sc.nextInt();
+            }
+        }
+
+        int[][] add = new int[rows][cols];
+        int[][] sub = new int[rows][cols];
+        int[][] mul = new int[rows][cols];
+        int[][] div = new int[rows][cols];
+        int[][] mod = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                add[i][j] = matrix1[i][j] + matrix2[i][j];
+                sub[i][j] = matrix1[i][j] - matrix2[i][j];
+                mul[i][j] = matrix1[i][j] * matrix2[i][j];
+                // To avoid division by zero
+                div[i][j] = matrix2[i][j] != 0 ? matrix1[i][j] / matrix2[i][j] : 0;
+                mod[i][j] = matrix2[i][j] != 0 ? matrix1[i][j] % matrix2[i][j] : 0;
+            }
+        }
+
+        System.out.println("\nAddition of matrices:");
+        printMatrix(add);
+
+        System.out.println("\nSubtraction of matrices:");
+        printMatrix(sub);
+
+        System.out.println("\nMultiplication of matrices (element-wise):");
+        printMatrix(mul);
+
+        System.out.println("\nDivision of matrices (element-wise):");
+        printMatrix(div);
+
+        System.out.println("\nModulus of matrices (element-wise):");
+        printMatrix(mod);
+
+        sc.close();
+    }
+
+    public static void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.print(val + "\t");
+            }
+            System.out.println();
+        }
+    }
+}
