@@ -1,0 +1,42 @@
+Write a java program using compile time polymorphism (method
+overloading) to compare two strings. The program should implement
+two different versions of strcmp the first version of usrstrcmp () that
+compares two string the second version should compare only
+specified number of characters from first string with second string
+and display the results.
+
+code:-
+
+package project;
+
+public class StringCompare {
+    
+    public int usrstrcmp(String s1, String s2) {
+        return s1.compareTo(s2);
+    }
+
+   
+    public int usrstrcmp(String s1, String s2, int n) {
+        String sub = s1.length() >= n ? s1.substring(0, n) : s1;
+        return sub.compareTo(s2);
+    }
+
+    public static void main(String[] args) {
+        StringCompare sc = new StringCompare();
+
+        String str1 = "hello";
+        String str2 = "hello";
+        String str3 = "hell";
+        String str4 = "heaven";
+
+     
+        System.out.println("Compare full strings:");
+        System.out.println("Compare 'hello' and 'hello': " + sc.usrstrcmp(str1, str2));
+        System.out.println("Compare 'hello' and 'heaven': " + sc.usrstrcmp(str1, str4));
+
+      
+        System.out.println("\nCompare first n characters:");
+        System.out.println("Compare first 4 chars of 'hello' with 'hell': " + sc.usrstrcmp(str1, str3, 4));
+        System.out.println("Compare first 2 chars of 'hello' with 'heaven': " + sc.usrstrcmp(str1, str4, 2));
+    }
+}
