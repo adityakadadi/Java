@@ -1,0 +1,71 @@
+Write a Java program using encapsulation and constructors to create a class to represent a complex number and perform the following operations:
+a) Addition of two complex numbers
+b) Subtraction of two complex numbers
+c) Compare two complex numbers.
+
+code:-
+
+package project;
+
+class ComplexNumber {
+
+    private double real;
+    private double imaginary;
+
+
+    public ComplexNumber(double real, double imaginary) {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+
+
+    public double getReal() {
+        return real;
+    }
+
+    public double getImaginary() {
+        return imaginary;
+    }
+
+    
+    public ComplexNumber add(ComplexNumber other) {
+        return new ComplexNumber(this.real + other.real, this.imaginary + other.imaginary);
+    }
+
+ 
+    public ComplexNumber subtract(ComplexNumber other) {
+        return new ComplexNumber(this.real - other.real, this.imaginary - other.imaginary);
+    }
+
+    
+    public boolean equals(ComplexNumber other) {
+        return this.real == other.real && this.imaginary == other.imaginary;
+    }
+
+    
+    @Override
+    public String toString() {
+        return real + " + " + imaginary + "i";
+    }
+}
+
+public class ComplexNumberTest {
+    public static void main(String[] args) {
+        ComplexNumber c1 = new ComplexNumber(4, 5);
+        ComplexNumber c2 = new ComplexNumber(3, 2);
+
+        ComplexNumber sum = c1.add(c2);
+        ComplexNumber diff = c1.subtract(c2);
+
+        System.out.println("First complex number: " + c1);
+        System.out.println("Second complex number: " + c2);
+
+        System.out.println("Sum: " + sum);
+        System.out.println("Difference: " + diff);
+
+        if (c1.equals(c2))
+            System.out.println("The two complex numbers are equal.");
+        else
+            System.out.println("The two complex numbers are not equal.");
+    }
+}
