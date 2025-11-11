@@ -1,0 +1,61 @@
+Write a java program to create an Employee database which stores following information about the Employee: Name, Emp_id,department, age, and designation. Perform the following operations:
+a) Read and display the details of at least five Employees.
+b) Calculate and display the sum of salary of all the employees of “sales” department.
+c) Retrieve the details of “highest paid manager” in the purchase department.
+
+code:-
+package project;
+
+import java.util.*;
+
+class Employee {
+    String name, dept, designation;
+    int empId, age;
+    double salary;
+
+    Employee(String n, int id, String d, int a, String des, double s) {
+        name = n; empId = id; dept = d; age = a; designation = des; salary = s;
+    }
+
+    void show() {
+        System.out.println(empId + " | " + name + " | " + dept + " | " + age + " | " + designation + " | " + salary);
+    }
+
+public class EmployeeDatabase {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Employee[] emp = new Employee[5];
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Enter details for Employee " + (i+1) + ":");
+            System.out.print("Name: "); String name = sc.nextLine();
+            System.out.print("ID: "); int id = sc.nextInt(); sc.nextLine();
+            System.out.print("Department: "); String dept = sc.nextLine();
+            System.out.print("Age: "); int age = sc.nextInt(); sc.nextLine();
+            System.out.print("Designation: "); String des = sc.nextLine();
+            System.out.print("Salary: "); double sal = sc.nextDouble(); sc.nextLine();
+            emp[i] = new Employee(name, id, dept, age, des, sal);
+        }
+
+        System.out.println("\nEmployee Details:");
+        for (Employee e : emp) e.show();
+
+        double salesSum = 0;
+        for (Employee e : emp)
+            if (e.dept.equalsIgnoreCase("sales"))
+                salesSum += e.salary;
+        System.out.println("\nTotal Salary of Sales Dept = " + salesSum);
+
+        Employee highest = null;
+        for (Employee e : emp)
+            if (e.dept.equalsIgnoreCase("purchase") && e.designation.equalsIgnoreCase("manager"))
+                if (highest == null || e.salary > highest.salary) highest = e;
+
+        System.out.println("\nHighest Paid Manager in Purchase Dept:");
+        if (highest != null) highest.show();
+        else System.out.println("No Manager found in Purchase Dept.");
+
+        sc.close();
+    	}
+	}
+}
